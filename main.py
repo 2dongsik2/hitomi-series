@@ -1,4 +1,6 @@
 import requests, json
+from datetime import datetime
+from pytz import timezone
 from urllib.parse import unquote
 from bs4 import BeautifulSoup
 
@@ -18,4 +20,7 @@ def get_series(filename):
     json.dump(array, file, indent='\t')
   return True
 
+with open('latest.log', 'w', encoding='utf-8') as file:
+  date = datetime.now(timezone('Asia/Seoul'))
+  file.write(str(date))
 list(map(get_series, ["artists", "characters", "series", "tags"]))
